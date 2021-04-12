@@ -20,21 +20,30 @@ public class GestureDetector : MonoBehaviour
     // List of gestures that have been saved and can be recognised later on in script
     [SerializeField] private List<Gesture> gestures;
 
+    private void Start()
+    {
+        if (gestures.Count > 0)
+            Debug.Log(gestures[0].name);
+
+    }
+
     /// <summary>
     /// Saves the current gesture to a new Gesture Struct into the list of gestures
-    /// remarks: We use save both lists and Dictionaries because only Lists can be serializable in the Unity Editor, while dictionaries will allow for more efficient lookups
+    /// <remarks>
+    /// We use save both lists and Dictionaries because only Lists can be serializable in the Unity Editor, while dictionaries will allow for more efficient lookups.
+    /// However, Dictionaries are not serialisable by Unity
+    /// </remarks>
     /// </summary>
     [ContextMenu("Save Gesture")]
     private void SaveGesture()
     {
-        // Save joint data for this gesture to a New Gesture struct
-        Gesture newGesture = new Gesture();
-        newGesture.name = "New Gesture";
+        // Save joint data for this gesture to a newGesture Gesture struct
+        Gesture newGesture = InitialiseNewGesture();
 
         // loop through all joints and save the data to newGesture
         foreach (TrackedHandJoint joint in Enum.GetValues(typeof(TrackedHandJoint)))
         {
-            if (HandJointUtils.TryGetJointPose(joint, Handedness.Right, out MixedRealityPose pose))
+            if (HandJointUtils.TryGetJointPose(joint, Handedness.Left, out MixedRealityPose pose))
             {
                 newGesture.joints.Add(joint);
                 newGesture.jointPoses.Add(pose);
@@ -47,6 +56,26 @@ public class GestureDetector : MonoBehaviour
         }
 
         gestures.Add(newGesture);
+    }
+
+    /// <summary>
+    /// Function to initialise all the lists and dictionaries within our Gestures struct
+    /// </summary>
+    /// <returns> Gesture object with initialised attributes </returns>
+    private Gesture InitialiseNewGesture()
+    {
+        Gesture newGesture = new Gesture
+        {
+            name = "New Gesture",
+            gestureJointData = new Dictionary<TrackedHandJoint, MixedRealityPose>(),
+            gestureJointPositionData = new Dictionary<TrackedHandJoint, Vector3>(),
+
+            joints = new List<TrackedHandJoint>(),
+            jointPoses = new List<MixedRealityPose>(),
+            positionsFromPalm = new List<Vector3>(),
+        };
+
+        return newGesture;
     }
 
 
