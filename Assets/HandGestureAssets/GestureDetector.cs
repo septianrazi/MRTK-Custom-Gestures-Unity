@@ -20,13 +20,49 @@ public class GestureDetector : MonoBehaviour
     // List of gestures that have been saved and can be recognised later on in script
     [SerializeField] private List<Gesture> gestures;
 
+    public Gesture prevGesture;                                             // the most recent gesture in the previous frame, kept track to trigger Change events
+
+
+    [SerializeField] private float gestureRecogThresh = 0.25f;              // Allowed margin of error of the cumulative distance between a gesture and current pose, value of 0.25 seems quite optimal
+
+    private Handedness handedness;                                                     // The handedness of the palm joint this component is attached to
+
+
     private void Start()
     {
-        if (gestures.Count > 0)
-            Debug.Log(gestures[0].name);
+        transform.parent.TryGetComponent(out BaseHandVisualizer baseHandVisualizer);
+        handedness = baseHandVisualizer.Handedness;
+        if (handedness == Handedness.None)
+            handedness = Handedness.Both;
 
+        //if (gestures.Count > 0)
+        //    Debug.Log(gestures[0].name);
     }
 
+    private void FixedUpdate()
+    {
+        //-------------------------------------------------------------------
+        //Handles the Detection of Gestures and their corresponding functions
+        //-------------------------------------------------------------------
+        Gesture currentDetectedGesture = TryRecogniseGesture();
+
+        bool hasRecognisedGesture = !currentDetectedGesture.Equals(new Gesture());      // Set flag whether gesture has been detected
+
+        if (hasRecognisedGesture && !currentDetectedGesture.Equals(prevGesture))        // if gesture is recognised and is different to before
+        {
+            if (!prevGesture.Equals(new Gesture()))                                     // if gesture transitioned from another saved gesture, invoke the onderecognised event
+                prevGesture.onDerecognise.Invoke();
+
+            prevGesture = currentDetectedGesture;
+            currentDetectedGesture.onRecognise.Invoke();
+            //Debug.Log("TRIGGERED " + currentGesture.name);
+        }
+        else if (!hasRecognisedGesture && !currentDetectedGesture.Equals(prevGesture))  // gesture is not recognised anymore and different to before
+        {
+            prevGesture.onDerecognise.Invoke();
+            prevGesture = currentDetectedGesture;
+        }
+    }
     /// <summary>
     /// Saves the current gesture to a new Gesture Struct into the list of gestures
     /// <remarks>
@@ -43,8 +79,9 @@ public class GestureDetector : MonoBehaviour
         // loop through all joints and save the data to newGesture
         foreach (TrackedHandJoint joint in Enum.GetValues(typeof(TrackedHandJoint)))
         {
-            if (HandJointUtils.TryGetJointPose(joint, Handedness.Left, out MixedRealityPose pose))
+            if (HandJointUtils.TryGetJointPose(joint, handedness, out MixedRealityPose pose))
             {
+                newGesture.handedness = handedness;
                 newGesture.joints.Add(joint);
                 newGesture.jointPoses.Add(pose);
                 newGesture.gestureJointData.Add(joint, pose);
@@ -100,6 +137,70 @@ public class GestureDetector : MonoBehaviour
         Debug.Log(toPrint);
     }
 
+
+
+    /// <summary>
+    /// Polling function to find the gesture that matches current pose
+    /// </summary>
+    /// <returns> Returns the saved gesture that is most likely, or an empty Gesture object if there is none </returns>
+    Gesture TryRecogniseGesture()
+    {
+        Gesture bestGesture = new Gesture();
+
+        float bestDistance = Mathf.Infinity;
+        foreach (Gesture gesture in gestures)
+        {
+            float thisDistance = CompareGestureDistancesToCurrent(gesture);
+
+            if (thisDistance > gestureRecogThresh)
+                continue;
+
+            if (thisDistance < bestDistance)
+            {
+                bestDistance = thisDistance;
+                bestGesture = gesture;
+            }
+        }
+        return bestGesture;
+    }
+
+    /// <summary>
+    /// Helper function to compare the current palm pose and a given gesture pose
+    /// </summary>
+    /// <param name="gesture"> Gesture struct to match the current pose with </param>
+    /// <returns> Cumulative distance of the current joints to the joints within the saved gesture </returns>
+    float CompareGestureDistancesToCurrent(Gesture gesture)
+    {
+        float distanceSum = 0;
+
+        foreach (TrackedHandJoint joint in Enum.GetValues(typeof(TrackedHandJoint)))
+        {
+            if (HandJointUtils.TryGetJointPose(joint, Handedness.Right, out MixedRealityPose currentPose))
+            {
+                int thisGesturePoseIndex = gesture.joints.IndexOf(joint);
+                Vector3 thisPosition = Vector3.zero;
+                try
+                {
+                    thisPosition = gesture.positionsFromPalm[thisGesturePoseIndex];
+                }
+                catch (Exception _)
+                {
+                    continue;
+                }
+                //MixedRealityPose thisGesturePose = gesture.jointPoses[thisGesturePoseIndex];
+
+                distanceSum += Vector3.Distance(thisPosition, transform.InverseTransformPoint(currentPose.Position));
+
+                if (distanceSum > gestureRecogThresh)
+                    return Mathf.Infinity;
+            }
+        }
+
+        if (distanceSum == 0)
+            return Mathf.Infinity;
+        return distanceSum;
+    }
+
 }
 
 /// <summary>
@@ -117,6 +218,8 @@ public struct Gesture
     public List<TrackedHandJoint> joints;
     public List<MixedRealityPose> jointPoses;
     public List<Vector3> positionsFromPalm;      // List of joint's positions from the palm
+
+    public Handedness handedness;
 
     // custom events to trigger when recognising / losing gesture
     public UnityEvent onRecognise;
