@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gestures:
-  - name: THUMB
+  - name: THUMBS UP
     joints: 01000000020000000300000004000000050000000600000008000000090000000a0000000b0000000d0000000e0000000f00000010000000120000001300000014000000150000001700000018000000190000001a000000
     jointPoses:
     - position: {x: -0.10741325, y: 0.8532802, z: 0.3214783}
@@ -117,7 +117,19 @@ MonoBehaviour:
     handedness: 1
     onRecognise:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 9062911531653552325, guid: 4b0670bf05c00794fa5ab43e7ae85b4f, type: 3}
+          m_TargetAssemblyTypeName: ObjectSpawner, Assembly-CSharp
+          m_MethodName: SpawnObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1760440962583096, guid: 97f4a8d19ea425a47ae392bde7e260cb, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onDerecognise:
       m_PersistentCalls:
         m_Calls: []
@@ -194,7 +206,19 @@ MonoBehaviour:
     handedness: 1
     onRecognise:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 9062911531653552325, guid: 4b0670bf05c00794fa5ab43e7ae85b4f, type: 3}
+          m_TargetAssemblyTypeName: ObjectSpawner, Assembly-CSharp
+          m_MethodName: SpawnObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1000013972948528, guid: 0f51a6c91c2722e4b992f30ef1a244f3, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onDerecognise:
       m_PersistentCalls:
         m_Calls: []
@@ -271,20 +295,134 @@ MonoBehaviour:
     handedness: 1
     onRecognise:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 9062911531653552325, guid: 4b0670bf05c00794fa5ab43e7ae85b4f, type: 3}
+          m_TargetAssemblyTypeName: ObjectSpawner, Assembly-CSharp
+          m_MethodName: SpawnObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1942124751002478, guid: 269666423cfb5994c9d52e58a9ee03d5, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onDerecognise:
       m_PersistentCalls:
         m_Calls: []
-  prevGesture:
-    name: 
-    joints: 
-    jointPoses: []
-    positionsFromPalm: []
-    handedness: 0
+  - name: GUN
+    joints: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a000000
+    jointPoses:
+    - position: {x: -0.15513402, y: -0.16667493, z: 0.33260834}
+      rotation: {x: -0.27167243, y: -0.46459663, z: -0.7961019, w: -0.27670506}
+    - position: {x: -0.11240613, y: -0.13904256, z: 0.35561097}
+      rotation: {x: -0.27177572, y: -0.4645899, z: -0.79614687, w: -0.2764858}
+    - position: {x: -0.15101257, y: -0.1333259, z: 0.33474988}
+      rotation: {x: 0.3885165, y: -0.46825364, z: -0.6570775, w: -0.44501984}
+    - position: {x: -0.15552023, y: -0.08713989, z: 0.34722376}
+      rotation: {x: 0.3492446, y: -0.4904378, z: -0.6413891, w: -0.47551972}
+    - position: {x: -0.1548725, y: -0.053341165, z: 0.35689282}
+      rotation: {x: 0.4393565, y: -0.43392593, z: -0.6762959, w: -0.40161926}
+    - position: {x: -0.16009237, y: -0.03337647, z: 0.36193478}
+      rotation: {x: 0.4393565, y: -0.43392593, z: -0.6762959, w: -0.40161926}
+    - position: {x: -0.14331436, y: -0.14243303, z: 0.3380739}
+      rotation: {x: -0.21194649, y: -0.45742995, z: -0.8413309, w: -0.19493306}
+    - position: {x: -0.10685719, y: -0.09561066, z: 0.37158045}
+      rotation: {x: -0.30325738, y: -0.563834, z: -0.673321, w: -0.36981753}
+    - position: {x: -0.067193955, y: -0.06990327, z: 0.38024205}
+      rotation: {x: -0.29410747, y: -0.6625216, z: -0.56352043, w: -0.3962457}
+    - position: {x: -0.04458642, y: -0.05634658, z: 0.3788994}
+      rotation: {x: -0.36888325, y: -0.5788746, z: -0.6225594, w: -0.37583137}
+    - position: {x: -0.030216277, y: -0.049221277, z: 0.37982577}
+      rotation: {x: -0.36888325, y: -0.5788746, z: -0.6225594, w: -0.37583137}
+    - position: {x: -0.13873625, y: -0.15067238, z: 0.33889076}
+      rotation: {x: -0.2133864, y: -0.4387043, z: -0.79072654, w: -0.3698058}
+    - position: {x: -0.096196786, y: -0.1162281, z: 0.37256658}
+      rotation: {x: -0.46520677, y: -0.719088, z: -0.46710747, w: -0.21978548}
+    - position: {x: -0.058859166, y: -0.09298619, z: 0.34933868}
+      rotation: {x: 0.50307155, y: 0.8617343, z: 0.058299705, w: -0.030564725}
+    - position: {x: -0.058682762, y: -0.08911544, z: 0.3200985}
+      rotation: {x: 0.5673952, y: 0.81297255, z: -0.07524732, w: -0.10712686}
+    - position: {x: -0.06341091, y: -0.08912968, z: 0.30250773}
+      rotation: {x: 0.5673952, y: 0.81297255, z: -0.07524732, w: -0.10712686}
+    - position: {x: -0.13199042, y: -0.16145925, z: 0.33960605}
+      rotation: {x: -0.24392048, y: -0.47745156, z: -0.7178644, w: -0.4440874}
+    - position: {x: -0.087203905, y: -0.13433929, z: 0.3641947}
+      rotation: {x: -0.5169582, y: -0.75110793, z: -0.38581386, w: -0.14049461}
+    - position: {x: -0.06288325, y: -0.11702179, z: 0.33776614}
+      rotation: {x: 0.38066566, y: 0.6945063, z: -0.43462273, w: -0.4287864}
+    - position: {x: -0.08661366, y: -0.124123074, z: 0.33124775}
+      rotation: {x: 0.286262, y: 0.4850301, z: -0.66697705, w: -0.48779237}
+    - position: {x: -0.10408835, y: -0.1316385, z: 0.33871955}
+      rotation: {x: 0.286262, y: 0.4850301, z: -0.66697705, w: -0.48779237}
+    - position: {x: -0.12675594, y: -0.16967031, z: 0.33692947}
+      rotation: {x: -0.28123337, y: -0.52341896, z: -0.60887927, w: -0.52555346}
+    - position: {x: -0.07671298, y: -0.15050896, z: 0.35340488}
+      rotation: {x: -0.56280065, y: -0.75420517, z: -0.33785686, w: -0.016817361}
+    - position: {x: -0.066431575, y: -0.1380723, z: 0.3338604}
+      rotation: {x: 0.33820122, y: 0.68691915, z: -0.40831098, w: -0.49703532}
+    - position: {x: -0.08734265, y: -0.142973, z: 0.33009967}
+      rotation: {x: 0.27099493, y: 0.35840708, z: -0.69799256, w: -0.5575953}
+    - position: {x: -0.10029818, y: -0.14627218, z: 0.34002805}
+      rotation: {x: 0.27099493, y: 0.35840708, z: -0.69799256, w: -0.5575953}
+    positionsFromPalm:
+    - {x: 0.006695484, y: -0.00097352284, z: -0.05543072}
+    - {x: -0.000000012831018, y: -0.000000026801887, z: -0.0000000064738495}
+    - {x: 0.027292931, y: -0.013695098, z: -0.032029092}
+    - {x: 0.06463548, y: -0.020933343, z: -0.0026657342}
+    - {x: 0.0892976, y: -0.026489792, z: 0.021771317}
+    - {x: 0.10766593, y: -0.029316155, z: 0.032060795}
+    - {x: 0.01618422, y: -0.008398327, z: -0.030690422}
+    - {x: 0.029015763, y: -0.004870695, z: 0.036145613}
+    - {x: 0.020608323, y: -0.015286423, z: 0.08229637}
+    - {x: 0.013952546, y: -0.026357062, z: 0.10531438}
+    - {x: 0.009001382, y: -0.0311901, z: 0.11981462}
+    - {x: 0.0074179717, y: -0.0051078666, z: -0.032046482}
+    - {x: 0.007450172, y: 0.0025708296, z: 0.031758778}
+    - {x: -0.006646295, y: -0.034767296, z: 0.06143997}
+    - {x: -0.009229762, y: -0.062433578, z: 0.051545262}
+    - {x: -0.009026013, y: -0.07719672, z: 0.040877625}
+    - {x: -0.0046470743, y: -0.0012564188, z: -0.033452008}
+    - {x: -0.0128584355, y: 0.0009551367, z: 0.023763444}
+    - {x: -0.022518102, y: -0.034327056, z: 0.039628986}
+    - {x: -0.011987158, y: -0.03272407, z: 0.016335646}
+    - {x: -0.0036582293, y: -0.019671414, z: 0.0029965641}
+    - {x: -0.014467074, y: -0.0012102367, z: -0.03580803}
+    - {x: -0.033294894, y: -0.003900384, z: 0.016928772}
+    - {x: -0.035306506, y: -0.028392393, z: 0.02313033}
+    - {x: -0.024737954, y: -0.025778363, z: 0.004238386}
+    - {x: -0.016216787, y: -0.0131390905, z: -0.0024654535}
+    handedness: 7
     onRecognise:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
     onDerecognise:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   gestureRecogThresh: 0.25
+  handedness: 7
