@@ -44,11 +44,15 @@ namespace CustomGestureDetector
             //    Debug.Log(gestures[0].name);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
+            // Checking Key Presses
             if (DEBUGMODE)
                 CheckKeyPresses();
+        }
 
+        private void FixedUpdate()
+        {
             //-------------------------------------------------------------------
             //Handles the Detection of Gestures and their corresponding functions
             //-------------------------------------------------------------------
