@@ -763,7 +763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3555897486095021553, guid: 08f0c22580a988c438a20be7cbb68d72, type: 3}
       propertyPath: DEBUGMODE
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3555897486095021553, guid: 08f0c22580a988c438a20be7cbb68d72, type: 3}
       propertyPath: defaultHandedness
@@ -5200,7 +5200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3555897486095021553, guid: 08f0c22580a988c438a20be7cbb68d72, type: 3}
       propertyPath: DEBUGMODE
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3555897486095021553, guid: 08f0c22580a988c438a20be7cbb68d72, type: 3}
       propertyPath: defaultHandedness
