@@ -141,7 +141,7 @@ Custom Gestures on the Oculus:
 
 ![Oculus Example](Screenshots/OculusExample.gif)
 
-
+Both examples above use three different hand gestures on either the right or left hand that will cause a sphere object to spawn and track to the users hand. The gestures include: THUMBS UP, FINGER GUN, SPIDERMAN, AND TWO.
 
 <!-- ROADMAP -->
 <!-- ## Roadmap
