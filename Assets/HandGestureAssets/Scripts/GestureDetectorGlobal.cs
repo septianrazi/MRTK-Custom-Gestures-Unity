@@ -17,12 +17,6 @@ namespace CustomGestureDetector
     /// </summary>
     public class GestureDetectorGlobal : MonoBehaviour
     {
-        [SerializeField] private float gestureRecogThresh = 0.25f;              // Allowed margin of error of the cumulative distance between a gesture and current pose, value of 0.25 seems quite optimal
-
-        [SerializeField] private Handedness defaultHandedness = Handedness.Any; // The handedness of the palm joint this component is attached to
-
-        [SerializeField] private bool DEBUGMODE = false;                        // Whether currently in debug mode or not
-
         private IMixedRealityHandJointService HandJointService => CoreServices.GetInputSystemDataProvider<IMixedRealityHandJointService>();
 
         // List of gestures that have been saved and can be recognised later on in script
@@ -30,7 +24,9 @@ namespace CustomGestureDetector
 
         private Gesture prevGesture;                                             // the most recent gesture in the previous frame, kept track to trigger Change events
 
+        [SerializeField] private float gestureRecogThresh = 0.25f;              // Allowed margin of error of the cumulative distance between a gesture and current pose, value of 0.25 seems quite optimal
 
+        [SerializeField] private Handedness handedness = Handedness.Any;                                                     // The handedness of the palm joint this component is attached to
 
 
         private void Start()
@@ -42,13 +38,6 @@ namespace CustomGestureDetector
 
             //if (gestures.Count > 0)
             //    Debug.Log(gestures[0].name);
-        }
-
-        private void Update()
-        {
-            // Checking Key Presses
-            if (DEBUGMODE)
-                CheckKeyPresses();
         }
 
         private void FixedUpdate()
@@ -67,7 +56,7 @@ namespace CustomGestureDetector
 
                 prevGesture = currentDetectedGesture;
                 currentDetectedGesture.onRecognise.Invoke();
-                //Debug.Log("TRIGGERED " + currentDetectedGesture.name);
+                Debug.Log("TRIGGERED " + currentDetectedGesture.name);
             }
             else if (!hasRecognisedGesture && !currentDetectedGesture.Equals(prevGesture))  // gesture is not recognised anymore and different to before
             {
@@ -75,53 +64,15 @@ namespace CustomGestureDetector
                 prevGesture = currentDetectedGesture;
             }
         }
-
-        /// <summary>
-        /// Checks the keypresses in debug mode
-        /// </summary>
-        void CheckKeyPresses()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SaveGestureDefault();
-            }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                SaveGestureLeft();
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                SaveGestureRight();
-            }
-        }
-
-        [ContextMenu("Save Left Gesture")]
-        private void SaveGestureLeft()
-        {
-            SaveGesture(Handedness.Left);
-        }
-
-        [ContextMenu("Save Right Gesture")]
-        private void SaveGestureRight()
-        {
-            SaveGesture(Handedness.Right);
-        }
-
-        [ContextMenu("Save Default Gesture")]
-        private void SaveGestureDefault()
-        {
-            SaveGesture(defaultHandedness);
-        }
-
         /// <summary>
         /// Saves the current gesture to a new Gesture Struct into the list of gestures
-        /// </summary>
-        /// <param name="handedness">Which hand to save gesture from</param>
         /// <remarks>
         /// We use save both lists and Dictionaries because only Lists can be serializable in the Unity Editor, while dictionaries will allow for more efficient lookups.
         /// However, Dictionaries are not serialisable by Unity
         /// </remarks>
-        private void SaveGesture(Handedness handedness)
+        /// </summary>
+        [ContextMenu("Save Gesture")]
+        private void SaveGesture()
         {
             // Save joint data for this gesture to a newGesture Gesture struct
             Gesture newGesture = InitialiseNewGesture();
@@ -136,7 +87,7 @@ namespace CustomGestureDetector
             }
 
 
-            // loop through all joints and save the data to newGesture
+                // loop through all joints and save the data to newGesture
             foreach (TrackedHandJoint joint in Enum.GetValues(typeof(TrackedHandJoint)))
             {
                 if (HandJointUtils.TryGetJointPose(joint, handedness, out MixedRealityPose pose))
@@ -157,19 +108,16 @@ namespace CustomGestureDetector
         }
 
         /// <summary>
-        /// Converts a position in world space into local space relative to reference. InverseTransformPoint() function without having to include the transform. 
+        /// InverseTransformPoint function without having to include 
         /// </summary>
-        /// <remarks>
-        /// Obtained from PraetorBlue https://forum.unity.com/threads/transform-inversetransformpoint-without-transform.954939/
-        /// </remarks>
-        /// <param name="refPos">Position of the reference</param>
-        /// <param name="refRot">Rotation of the reference</param>
-        /// <param name="refScale">Scale of the reference</param>
-        /// <param name="pos">Position of object to be converted to local space</param>
-        /// <returns> Position of given object within local space </returns>
-        Vector3 InverseTransformPoint(Vector3 refPos, Quaternion refRot, Vector3 refScale, Vector3 pos)
+        /// <param name="transforPos"></param>
+        /// <param name="transformRotation"></param>
+        /// <param name="transformScale"></param>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        Vector3 InverseTransformPoint(Vector3 transforPos, Quaternion transformRotation, Vector3 transformScale, Vector3 pos)
         {
-            Matrix4x4 matrix = Matrix4x4.TRS(refPos, refRot, refScale);
+            Matrix4x4 matrix = Matrix4x4.TRS(transforPos, transformRotation, transformScale);
             Matrix4x4 inverse = matrix.inverse;
             return inverse.MultiplyPoint3x4(pos);
         }
@@ -250,26 +198,20 @@ namespace CustomGestureDetector
         /// <returns> Cumulative distance of the current joints to the joints within the saved gesture </returns>
         float CompareGestureDistancesToCurrent(Gesture gesture)
         {
-
-            Handedness thisHandedness = gesture.handedness;
             float distanceSum = 0;
 
             Vector3 palmPos = Vector3.zero;
             Quaternion palmRot = Quaternion.identity;
 
-            if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, thisHandedness, out MixedRealityPose palmPose))
+            if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, handedness, out MixedRealityPose palmPose))
             {
                 palmPos = palmPose.Position;
                 palmRot = palmPose.Rotation;
             }
-            else
-            {
-                return Mathf.Infinity;
-            }
 
             foreach (TrackedHandJoint joint in Enum.GetValues(typeof(TrackedHandJoint)))
             {
-                if (HandJointUtils.TryGetJointPose(joint, thisHandedness, out MixedRealityPose currentPose))
+                if (HandJointUtils.TryGetJointPose(joint, handedness, out MixedRealityPose currentPose))
                 {
                     int thisGesturePoseIndex = gesture.joints.IndexOf(joint);
                     Vector3 thisSavedPosition = Vector3.zero;

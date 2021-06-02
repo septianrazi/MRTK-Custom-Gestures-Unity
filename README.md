@@ -22,10 +22,10 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url] -->
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
-# MRTK-Custom-Gestures-Unity
-Scripts and prefabs to allow custom gesture detection via Mixed Reality Toolkit in Unity
+# MRTK Custom Gestures in Unity
+Scripts and prefabs to allow custom gesture detection via Mixed Reality Toolkit (MRTK) in Unity
 
 <!-- PROJECT LOGO -->
 <!-- <br />
@@ -34,25 +34,25 @@ Scripts and prefabs to allow custom gesture detection via Mixed Reality Toolkit 
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">MRTK Custom Gestures in Unity</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Custom Gestures with Mixed Reality Toolkit!
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/septianrazi/MRTK-Custom-Gestures-Unity">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/septianrazi/MRTK-Custom-Gestures-Unity/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/septianrazi/MRTK-Custom-Gestures-Unity/issues">Request Feature</a>
   </p>
 </p> -->
 
 
 
-<!-- TABLE OF CONTENTS
+<!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
@@ -66,17 +66,18 @@ Scripts and prefabs to allow custom gesture detection via Mixed Reality Toolkit 
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#Use in your own Projects">Use in your own Projects</a></li>
+        <li><a href="#running">Running</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
-</details> -->
+</details>
 
 
 
@@ -91,52 +92,56 @@ Inspired by [Oculus Custom Hand Pose tutorial by Valem](https://www.youtube.com/
 
 ### Built With
 
-* [Unity](https://unity.com)
-* [Microsoft Mixed Reality Toolkit](https://docs.microsoft.com/en-gb/windows/mixed-reality/mrtk-unity/)
+* [Unity 2020.1.14](https://unity.com)
+* [Microsoft Mixed Reality Toolkit 2.61](https://docs.microsoft.com/en-gb/windows/mixed-reality/mrtk-unity/)
 * [Oculus](https://developer.oculus.com/)
 
 
 
 <!-- GETTING STARTED -->
-<!-- ## Getting Started
+## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+You will need to download and install the following:
+* Unity
+  
+  https://unity3d.com/get-unity/download
 
-### Installation
+* Mixed Reality Toolkit
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+  https://docs.microsoft.com/en-us/windows/mixed-reality/develop/install-the-tools?tabs=unity
+
+
+### Use in your own Projects
+
+To use the custom hand gestures in your own projects, its as simple as using the GestureDetectorGlobal.cs script onto a gameObject in a scene in your project. See how to setup your own [custom gestures](Assets/HandGestureAssets/Scripts).
+
+### Running the Project
+
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone git@github.com:septianrazi/MRTK-Custom-Gestures-Unity.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ``` -->
-
+2. Open Project in Unity (2020 above recommended)
+3. Change build setttings depending on intended hardware (Android for Oculus, Universal Windows Platform for Hololens)
+4. Edit the project and include your own custom gestures
+5. Build and Run the project on your device
 
 
 <!-- USAGE EXAMPLES -->
-<!-- ## Usage
+## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Custom Gestures on the Hololens:
 
-_For more examples, please refer to the [Documentation](https://example.com)_ -->
+![HoloLens Example](Screenshots/HoloLensExample.gif)
 
+Custom Gestures on the Oculus:
 
+![Oculus Example](Screenshots/OculusExample.gif)
+
+Both examples above use three different hand gestures on either the right or left hand that will cause a sphere object to spawn and track to the users hand. The gestures include: THUMBS UP, FINGER GUN, SPIDERMAN, AND TWO.
 
 <!-- ROADMAP -->
 <!-- ## Roadmap
@@ -146,16 +151,19 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 
 <!-- CONTRIBUTING -->
-<!-- ## Contributing
+## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Choose an Issue you want to work on and assign yourself
+
+   If there is no exsiting issue, please submit one 
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request -->
-
+5. Open a Pull Request linking the issue
 
 
 <!-- LICENSE -->
@@ -178,6 +186,7 @@ Project Link: [https://github.com/septianrazi/MRTK-Custom-Gestures-Unity](https:
 ## Acknowledgements
 * [Valem](https://www.youtube.com/channel/UCPJlesN59MzHPPCp0Lg8sLw)
 * [OthNeilDrew's README Template](https://github.com/othneildrew/Best-README-Template)
+* [CSIRO's Data61](https://data61.csiro.au/)
 <!-- 
 * [Img Shields](https://shields.io)
 * [Choose an Open Source License](https://choosealicense.com)
