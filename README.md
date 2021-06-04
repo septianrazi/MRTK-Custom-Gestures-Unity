@@ -1,5 +1,4 @@
 
-
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -66,11 +65,11 @@ Scripts and prefabs to allow custom gesture detection via Mixed Reality Toolkit 
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#Use in your own Projects">Use in your own Projects</a></li>
-        <li><a href="#running">Running</a></li>
+        <li><a href="#use-in-your-own-projects">Use in your own Projects</a></li>
+        <li><a href="#running-the-project">Running this Project</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#examples">Examples</a></li>
     <!-- <li><a href="#roadmap">Roadmap</a></li> -->
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -86,14 +85,14 @@ Scripts and prefabs to allow custom gesture detection via Mixed Reality Toolkit 
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-This repository allows you to use custom gestures to trigger events using Microsoft Mixed Reality Toolkit (MRTK). It utilises the inbuild MRTK implementation of Hand Tracking via IMixedRealityHandPose to detect positions of joints to a custom gesture.
+This repository allows you to use custom gestures to trigger events using Microsoft Mixed Reality Toolkit (MRTK). It utilises the inbuild MRTK implementation of Hand Tracking via IMixedRealityHandPose to detect positions of joints to a custom gesture. To see how you can use it in your own project, see [here](Assets/HandGestureAssets/Scripts).
 
 Inspired by [Oculus Custom Hand Pose tutorial by Valem](https://www.youtube.com/watch?v=Iphbtuhun-8)
 
 ### Built With
 
 * [Unity 2020.1.14](https://unity.com)
-* [Microsoft Mixed Reality Toolkit 2.61](https://docs.microsoft.com/en-gb/windows/mixed-reality/mrtk-unity/)
+* [Microsoft Mixed Reality Toolkit 2.54](https://docs.microsoft.com/en-gb/windows/mixed-reality/mrtk-unity/)
 * [Oculus](https://developer.oculus.com/)
 
 
@@ -101,22 +100,17 @@ Inspired by [Oculus Custom Hand Pose tutorial by Valem](https://www.youtube.com/
 <!-- GETTING STARTED -->
 ## Getting Started
 
-
 ### Prerequisites
 
 You will need to download and install the following:
-* Unity
-  
-  https://unity3d.com/get-unity/download
+* [Unity](https://unity3d.com/get-unity/download)
 
-* Mixed Reality Toolkit
-
-  https://docs.microsoft.com/en-us/windows/mixed-reality/develop/install-the-tools?tabs=unity
+* [Mixed Reality Toolkit for Unity](https://docs.microsoft.com/en-us/windows/mixed-reality/develop/install-the-tools?tabs=unity)
 
 
 ### Use in your own Projects
 
-To use the custom hand gestures in your own projects, its as simple as using the GestureDetectorGlobal.cs script onto a gameObject in a scene in your project. See how to setup your own [custom gestures](Assets/HandGestureAssets/Scripts).
+To use the custom hand gestures in your own projects, its as simple as using the GestureDetectorGlobal.cs script onto a gameObject in a scene in your project. Find out more including how to setup your own custom gestures [here](Assets/HandGestureAssets/Scripts).
 
 ### Running the Project
 
@@ -131,7 +125,7 @@ To use the custom hand gestures in your own projects, its as simple as using the
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Examples
 
 Custom Gestures on the Hololens:
 
