@@ -137,6 +137,13 @@ Custom Gestures on the Oculus:
 
 Both examples above use three different hand gestures on either the right or left hand that will cause a sphere object to spawn and track to the users hand. The gestures include: THUMBS UP, FINGER GUN, SPIDERMAN, AND TWO.
 
+
+### Naruto In Mixed Reality
+
+Hand Gestures trigger the special moves in [Naruto In Mixed Reality](https://github.com/septianrazi/Naruto-In-Mixed-Reality)
+
+![Naruto In Mixed Reality RasenShuriken Example](Screenshots/ExampleRasenShuriken.gif)
+
 <!-- ROADMAP -->
 <!-- ## Roadmap
 
